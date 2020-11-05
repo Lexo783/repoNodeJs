@@ -1,13 +1,14 @@
 const Router = require('express').Router
 const router = Router()
+const store = require('store')
 
-const store = {
+// une rousources est une table et res_id fonctionne comme une id res_id peut etre remplacer par 1 et devras  etre envoyez dans l'url
+/*const store = {
     resources: {
         res_id: {id: '1', name: 'XX'},
     }
 }
 
-/*
 get /api/resources/res_id -> renvoi la resource store.resources['res_id']
 */
 /*
@@ -37,6 +38,37 @@ router.post('/ressources', (req, res) => {
     resource.id = Object.keys(store.resources).length +1
     store.resources[resource.id] = resource
     res.json(resource)
+})
+
+router.put('/resources/:id', (req, res) => {
+    const id = req.parms.id
+    if (req.params.id === req.body.id)
+    {
+        store.resources[id] = req.body
+        res.json(req.body)
+    }
+    else
+    {
+        res.status(400).end()
+    }
+
+})
+
+router.patch('/ressources/;id', (req, res) => {
+    const id = req.params.id
+    const ressource = store.resources.patch(id,req.body)
+    res.json(ressource)
+})
+
+router.delete('/resources/:id', (req, res) => {
+    const {id} = req.params
+    const result = store.resources.delete(id)
+    if (result === 'succes'){
+        req.json({ success: true})
+    }
+    else {
+        req.json({ success: false })
+    }
 })
 
 module.exports = router
