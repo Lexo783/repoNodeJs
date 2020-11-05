@@ -2,10 +2,10 @@ const Router = require('express').Router
 const router = Router()
 
 const store = {
-    resources: [
-        {id: '1', name: 'XX'},
-        {id: '2', name: 'XX'},
-    ],
+    resources: {
+        res_id: {id: '1', name: 'XX'},
+    }
+
 }
 
 /*
@@ -32,13 +32,11 @@ router.get('/resources/:id', (req, res) => {
     console.log(req.params)
     //const idx = req.params.id
     //const { params: { id }} = req
-    for (let i = 0; i < store.resources.length; i++)
-    {
-        if (Object.values(store.resources[i].id ) == req.params.id)
+        if (Object.values(store.resources[key].id ) == req.params.id)
         {
-            res.send(store.resources[i])
+            let id = req.params.id
+            res.send(store.resources[id])
         }
-    }
     //res.send( store.resources[1])
 })
 
