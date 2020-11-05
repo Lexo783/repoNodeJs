@@ -1,3 +1,6 @@
+// test
+const servHttp = require('./server_http')
+// end test
 const express = require('express')
 const middlewares = require('./middlewares')
 const defaultRouter = require('./routes')

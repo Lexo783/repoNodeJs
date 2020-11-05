@@ -38,6 +38,11 @@ async function tests() {
     const getResult_1 = await test_get(createResult.id)
     console.log({ getResult_1 })
 
+    const patchResult = await test_patch(createResult.id, { name: 'Oups', 'field1': 1 })
+    console.log({ patchResult })
+
+    // const deleteResult = await test_delete(createResult.id)
+    // console.log({ deleteResult })
 
 }
 
