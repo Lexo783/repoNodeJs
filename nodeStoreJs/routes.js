@@ -5,7 +5,6 @@ const store = {
     resources: {
         res_id: {id: '1', name: 'XX'},
     }
-
 }
 
 /*
@@ -29,15 +28,15 @@ Contraintes:
 */
 
 router.get('/resources/:id', (req, res) => {
-    console.log(req.params)
-    //const idx = req.params.id
-    //const { params: { id }} = req
-        if (Object.values(store.resources[key].id ) == req.params.id)
-        {
-            let id = req.params.id
-            res.send(store.resources[id])
-        }
-    //res.send( store.resources[1])
+    const id = req.params.id
+    res.json( store.resources[id])
+})
+
+router.post('/ressources', (req, res) => {
+    const resource = req.body
+    resource.id = Object.keys(store.resources).length +1
+    store.resources[resource.id] = resource
+    res.json(resource)
 })
 
 module.exports = router
